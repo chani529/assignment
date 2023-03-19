@@ -1,27 +1,36 @@
 package com.kakao.son.service
 
+import com.kakao.son.dto.BlogDTO
 import com.kakao.son.model.KeywordVo
+import com.kakao.son.openApi.BlogSearchHandler
+import com.kakao.son.repository.KeywordRepository
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
-class SearchService(val okHttpClient : OkHttpClient) {
-//    @Autowired
-//    lateinit var okHttpClient : OkHttpClient
+class SearchService() {
+    @Autowired
+    lateinit var blogSearchHandler: BlogSearchHandler
 
-    //curl -v -X GET "https://dapi.kakao.com/v2/search/blog" \
-    //--data-urlencode "query=https://brunch.co.kr/@tourism 집짓기" \
-    //-H "Authorization: KakaoAK ${REST_API_KEY}"
-    fun getSearch(): Any?{
-        return okHttpClient.newCall(
-                Request.Builder()
-                    .url("https://dapi.kakao.com/v2/search/blog?query=집짓기&page=1&size=5")
-                    .addHeader("Authorization", "KakaoAK efa774a7cc48088c8c30ecc68645be44")
-                    .build()
-            ).execute().body?.string()
-//            print(response.body?.string())
-//            response.body?.string()
+    @Autowired
+    lateinit var keywordRepository: KeywordRepository
+
+    fun getKeywordTopTenList(): List<KeywordVo?>{
+        return keywordRepository.findTop10ByOrderBySearchCountDescKeywordAsc()
+    }
+
+    fun getSearch( query : String, page : Int,sort : String ): BlogDTO?{
+        upsertKeyword(query)
+        return blogSearchHandler.getKakaoBlogSearch(query,page,sort)
+    }
+
+    @Transactional
+    private fun upsertKeyword( keyword: String ){
+        val keywordVo = keywordRepository.findByKeyword( keyword ) ?: KeywordVo( keyword = keyword )
+        keywordVo.searchCount = keywordVo.searchCount.plus(1)
+        keywordRepository.save(keywordVo)
     }
 }

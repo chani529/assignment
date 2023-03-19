@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository
 @Repository
 interface KeywordRepository : JpaRepository<KeywordVo?, Int> {
 
-    fun findByKeyword(keyword : String): KeywordVo?
+    fun findByKeyword( keyword : String ): KeywordVo?
 
-    abstract fun save(keywordVo: KeywordVo): KeywordVo
+    fun findTop10ByOrderBySearchCountDescKeywordAsc() : List<KeywordVo?>
 
 }
