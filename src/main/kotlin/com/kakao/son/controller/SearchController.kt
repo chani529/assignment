@@ -4,7 +4,9 @@ import com.kakao.son.dto.BlogDTO
 import com.kakao.son.model.KeywordVo
 import com.kakao.son.service.SearchService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -47,5 +49,6 @@ class SearchController {
         if( sort != "accuracy" && sort != "recency") throw Exception("문서 정렬 방식이 잘못 지정되었습니다.")
 
         return ResponseEntity.ok().body( searchService.getSearch( query, page, sort ) )
+
     }
 }

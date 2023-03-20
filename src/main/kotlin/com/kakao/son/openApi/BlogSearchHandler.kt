@@ -1,6 +1,8 @@
 package com.kakao.son.openApi
 
+import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.kakao.son.dto.BlogDTO
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -23,9 +25,13 @@ class BlogSearchHandler {
                 .url("https://dapi.kakao.com/v2/search/blog?query=${query}&page=${page}&sort=${sort}")
                 .addHeader("Authorization", "KakaoAK $kakaoApiKey")
                 .build()
-        ).execute().body?.string()
+        ).execute().use { it ->
+            if(!it.isSuccessful) throw Exception("Kakao API Error")
+            it.body?.string()
+        }
 
         return Gson().fromJson(result, BlogDTO::class.java)
+
     }
 
 }

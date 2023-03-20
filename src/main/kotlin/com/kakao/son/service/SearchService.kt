@@ -4,8 +4,6 @@ import com.kakao.son.dto.BlogDTO
 import com.kakao.son.model.KeywordVo
 import com.kakao.son.openApi.BlogSearchHandler
 import com.kakao.son.repository.KeywordRepository
-import okhttp3.OkHttpClient
-import okhttp3.Request
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -22,7 +20,7 @@ class SearchService() {
         return keywordRepository.findTop10ByOrderBySearchCountDescKeywordAsc()
     }
 
-    fun getSearch( query : String, page : Int,sort : String ): BlogDTO?{
+    fun getSearch( query : String, page : Int,sort : String ): BlogDTO{
         upsertKeyword(query)
         return blogSearchHandler.getKakaoBlogSearch(query,page,sort)
     }
