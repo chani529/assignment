@@ -19,10 +19,13 @@ class BlogSearchHandler {
     @Value("\${kakao.api.key}")
     lateinit var kakaoApiKey: String
 
+    private val kakaoBlogSearchURL = "https://dapi.kakao.com/v2/search/blog"
+
+
     fun getKakaoBlogSearch(query : String, page : Int, sort : String) : BlogDTO {
         val result = okHttpClient.newCall(
             Request.Builder()
-                .url("https://dapi.kakao.com/v2/search/blog?query=${query}&page=${page}&sort=${sort}")
+                .url("${kakaoBlogSearchURL}?query=${query}&page=${page}&sort=${sort}")
                 .addHeader("Authorization", "KakaoAK $kakaoApiKey")
                 .build()
         ).execute().use { it ->
