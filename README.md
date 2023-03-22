@@ -1,11 +1,14 @@
 # Blog 검색 프로젝트
 
-1. [사용 기술](#사용-기술)
-2. [Dependency](#Dependency)
-3. [API](#API)
-4. [Test Case](#Test-Case)
-5. [Database (H2)](#Database-(H2))
+1. [JAR 다운로드 경로](#JAR-다운로드-경로)
+2. [사용 기술](#사용-기술)
+3. [Dependency](#Dependency)
+4. [API](#API)
+5. [Test Case](#Test-Case)
+6. [Database (H2)](#Database-(H2))
 
+## JAR 다운로드 경로
+https://github.com/chani529/assignment/raw/main/libs/son-0.0.1-SNAPSHOT.jar
 
 ## 사용 기술
 - Kotlin : 1.6.21
@@ -80,7 +83,11 @@ curl --location --request GET 'localhost:8080/search?query=집짓&page=1&sort=re
 ```
 
 ## Test Case
-(Test Code 기반으로 문서 작)
+- Test Code 기반으로 문서 작성
+- 실제 테스트 코드로 작업되어 있으며, 
+@DisplayName을 아래 이름으로 작업되어 있습니다.
+
+
 ### controller
 - TestCase001 - Blog 검색 성공
 - TestCase002 - 검색어 비여 있을 경우 에러
