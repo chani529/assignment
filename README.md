@@ -37,7 +37,7 @@ https://github.com/chani529/assignment/raw/main/libs/son-0.0.1-SNAPSHOT.jar
 ## API
 Default endpoint = localhost:8080
 
-GET {endpoint}/top-ten-keyword
+GET {endpoint}/search/top-ten-keyword
 ```curl
 curl --location --request GET 'localhost:8080/search/top-ten-keyword'
   
@@ -57,7 +57,7 @@ curl --location --request GET 'localhost:8080/search/top-ten-keyword'
 ]
 ```
 
-GET {endpoint}/top-ten-keyword
+GET {endpoint}/search?query=${query}&page=${page}&sort=${sort}
 ```curl
 curl --location --request GET 'localhost:8080/search?query=집짓&page=1&sort=recency' \
 --data-raw ''
@@ -81,7 +81,11 @@ curl --location --request GET 'localhost:8080/search?query=집짓&page=1&sort=re
         "isEnd": false
     }
 ```
-
+| 필드 이름 | 타입  | 설명          |
+|-------|-----|-------------|
+| query | 문자열 | 검색어 255자 제한 |
+| page  | 정수  | 페이지 번호 1~50 |
+| sort  | 문자열 | accuracy(정확도순), recency(최신순) |
 ## Test Case
 - Test Code 기반으로 문서 작성
 - 실제 테스트 코드로 작업되어 있으며, 
