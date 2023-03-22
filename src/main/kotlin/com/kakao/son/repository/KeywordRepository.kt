@@ -10,5 +10,4 @@ interface KeywordRepository : JpaRepository<KeywordVo?, Int> {
     fun findByKeyword( keyword : String ): KeywordVo?
 
     fun findTop10ByOrderBySearchCountDescKeywordAsc() : List<KeywordVo?>
-
 }

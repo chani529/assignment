@@ -10,7 +10,8 @@ import java.util.concurrent.TimeUnit
 
 class KakaoBlogTest {
     private val kakaoBlogSearchURL = "https://dapi.kakao.com/v2/search/blog"
-    private val kakaoBlogSearchErrorURL = "https://dapi.kakao.com/v2/search/b"
+    private val kakaoBlogSearchErrorURL = "https://dapi.kakao.com/v2/search/error"
+
     private var kakaoApiKey: String = "efa774a7cc48088c8c30ecc68645be44"
 
     private val okHttpClient = OkHttpClient()

@@ -21,7 +21,6 @@ class BlogSearchHandler {
 
     private val kakaoBlogSearchURL = "https://dapi.kakao.com/v2/search/blog"
 
-
     fun getKakaoBlogSearch(query : String, page : Int, sort : String) : BlogDTO {
         val result = okHttpClient.newCall(
             Request.Builder()

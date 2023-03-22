@@ -13,6 +13,7 @@ class SearchControllerTest {
         val sort1 = "accuracy"
 
         if( query1 == "") throw Exception("검색어가 비어있습니다.")
+        if( query1.length > 255) throw Exception("검색어는 최대 255자까지 제한됩니다.")
         if( page1 < 1 || page1 > 50 ) throw Exception("최대 50페이지까지만 검색 가능합니다.")
         if( sort1 != "accuracy" && sort1 != "recency") throw Exception("문서 정렬 방식이 잘못 지정되었습니다.")
 
@@ -27,6 +28,7 @@ class SearchControllerTest {
         val sort2 = "recency"
 
         if( query2 == "") throw Exception("검색어가 비어있습니다.")
+        if( query2.length > 255) throw Exception("검색어는 최대 255자까지 제한됩니다.")
         if( page2 < 1 || page2 > 50 ) throw Exception("최대 50페이지까지만 검색 가능합니다.")
         if( sort2 != "accuracy" && sort2 != "recency") throw Exception("문서 정렬 방식이 잘못 지정되었습니다.")
 
@@ -45,12 +47,23 @@ class SearchControllerTest {
     }
 
     @Test
-    fun `getSearch - queryError`(){
+    fun `getSearch - emptyQueryError`(){
         val query = ""
         val exception = assertThrows(Exception::class.java) {
             if( query == "") throw Exception("검색어가 비어있습니다.")
         }
         assertEquals("검색어가 비어있습니다.", exception.message)
+    }
+
+    @Test
+    fun `getSearch - toLongQueryError`(){
+        // 256자 만들기
+        val query = "a".repeat(256)
+
+        val exception = assertThrows(Exception::class.java) {
+            if( query.length > 255) throw Exception("검색어는 최대 255자까지 제한됩니다.")
+        }
+        assertEquals("검색어는 최대 255자까지 제한됩니다.", exception.message)
     }
 
     @Test

@@ -45,6 +45,7 @@ class SearchController {
     ): ResponseEntity<BlogDTO> {
 
         if( query == "") throw Exception("검색어가 비어있습니다.")
+        if( query.length > 255) throw Exception("검색어는 최대 255자까지 제한됩니다.")
         if( page < 1 || page > 50 ) throw Exception("최대 50페이지까지만 검색 가능합니다.")
         if( sort != "accuracy" && sort != "recency") throw Exception("문서 정렬 방식이 잘못 지정되었습니다.")
 
