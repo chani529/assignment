@@ -25,7 +25,7 @@ class SearchService() {
         return blogSearchHandler.getKakaoBlogSearch(query,page,sort)
     }
 
-    @Transactional
+    @Transactional // 동시성 이슈 처리
     private fun upsertKeyword( keyword: String ){
         val keywordVo = keywordRepository.findByKeyword( keyword ) ?: KeywordVo( keyword = keyword )
         keywordVo.searchCount = keywordVo.searchCount.plus(1)
