@@ -17,6 +17,7 @@ class KeywordRepositoryTest {
     lateinit var keywordRepository: KeywordRepository
 
     @Test
+    @DisplayName("TestCase008 - 많이 검색된 검색어 top10 가져오기")
     fun `getKeywordTopTenList - success`(){
         val result = keywordRepository.findTop10ByOrderBySearchCountDescKeywordAsc()
 
@@ -36,6 +37,7 @@ class KeywordRepositoryTest {
     }
 
     @Test
+    @DisplayName("TestCase009 - 검색어 추가 기능")
     fun `upsertKeyword - update - success`(){
         val keyword = "kakao10"
 
@@ -48,6 +50,7 @@ class KeywordRepositoryTest {
     }
 
     @Test
+    @DisplayName("TestCase010 - 검색어 업데이트 기능")
     fun `upsertKeyword - insert - success`(){
         val keyword = "daum1"
 

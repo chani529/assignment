@@ -2,11 +2,13 @@ package com.kakao.son.controller
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 class SearchControllerTest {
 
     @Test
+    @DisplayName("TestCase001 - Blog 검색 성공")
     fun `getSearch - success`(){
         val query1 = "TEST1"
         val page1 = 1
@@ -38,15 +40,7 @@ class SearchControllerTest {
     }
 
     @Test
-    fun `getSearch - pageError`(){
-        val page = 51
-        val exception = assertThrows(Exception::class.java) {
-            if( page < 1 || page > 50 ) throw Exception("최대 50페이지까지만 검색 가능합니다.")
-        }
-        assertEquals("최대 50페이지까지만 검색 가능합니다.", exception.message)
-    }
-
-    @Test
+    @DisplayName("TestCase002 - 검색어 비여 있을 경우 에러")
     fun `getSearch - emptyQueryError`(){
         val query = ""
         val exception = assertThrows(Exception::class.java) {
@@ -54,8 +48,8 @@ class SearchControllerTest {
         }
         assertEquals("검색어가 비어있습니다.", exception.message)
     }
-
     @Test
+    @DisplayName("TestCase003 - 검색어가 너무 길 경우")
     fun `getSearch - toLongQueryError`(){
         // 256자 만들기
         val query = "a".repeat(256)
@@ -65,8 +59,19 @@ class SearchControllerTest {
         }
         assertEquals("검색어는 최대 255자까지 제한됩니다.", exception.message)
     }
+    @Test
+    @DisplayName("TestCase004 - 페이지 검색 범위가 벗어 났을 경우")
+    fun `getSearch - pageError`(){
+        val page = 51
+        val exception = assertThrows(Exception::class.java) {
+            if( page < 1 || page > 50 ) throw Exception("최대 50페이지까지만 검색 가능합니다.")
+        }
+        assertEquals("최대 50페이지까지만 검색 가능합니다.", exception.message)
+    }
+
 
     @Test
+    @DisplayName("TestCase005 - 정렬 값이 잘못 되었을 경우")
     fun `getSearch - sortError`(){
         val sort = "sort"
         val exception = assertThrows(Exception::class.java) {

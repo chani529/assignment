@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test
 import okhttp3.*
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.DisplayName
 import java.util.concurrent.TimeUnit
 
 class KakaoBlogTest {
@@ -22,6 +23,7 @@ class KakaoBlogTest {
         }.build()
 
     @Test
+    @DisplayName("TestCase006 - 카카오 블로그 검색 성공")
     fun `getKakaoBlogSearch - success`() {
         val query = "집짓기"
         val page = 1
@@ -43,6 +45,7 @@ class KakaoBlogTest {
     }
 
     @Test
+    @DisplayName("TestCase007 - 카카오 블로그 검색 실패")
     fun `getKakaoBlogSearch - error`() {
         val query = "집짓기"
         val page = 1

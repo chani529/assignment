@@ -18,7 +18,7 @@ data class BlogDTO (
     )
 
     data class Meta(
-        @get:JsonProperty("isEnd")
+        @get:JsonProperty("isEnd") // 객체 직렬화 시 "is" 사라지는 이슈 처리를 위함
         @SerializedName("is_end")
         val isEnd: Boolean,
         @SerializedName("pageable_count")
