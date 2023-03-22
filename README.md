@@ -81,11 +81,11 @@ curl --location --request GET 'localhost:8080/search?query=집짓&page=1&sort=re
         "isEnd": false
     }
 ```
-| 필드 이름 | 타입  | 설명          |
-|-------|-----|-------------|
-| query | 문자열 | 검색어 255자 제한 |
-| page  | 정수  | 페이지 번호 1~50 |
-| sort  | 문자열 | accuracy(정확도순), recency(최신순) |
+| 필드 이름 | 타입  | 기본 값 | 필수여부 | 설명                         |
+|-------|-----|------|------|-----------------------------|
+| query | 문자열 | -    | Y    | 검색어 255자 제한                   |
+| page  | 정수  | 1    | N    | 페이지 번호 1~50                   |
+| sort  | 문자열 |accuracy| N    |  accuracy(정확도순), recency(최신순) |
 ## Test Case
 - Test Code 기반으로 문서 작성
 - 실제 테스트 코드로 작업되어 있으며, 
