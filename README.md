@@ -39,8 +39,6 @@ Default endpoint = localhost:8080
 
 GET {endpoint}/search/top-ten-keyword
 ```curl
-curl --location --request GET 'localhost:8080/search/top-ten-keyword'
-  
 # 200 ok
 [
     {
@@ -59,9 +57,6 @@ curl --location --request GET 'localhost:8080/search/top-ten-keyword'
 
 GET {endpoint}/search?query=${query}&page=${page}&sort=${sort}
 ```curl
-curl --location --request GET 'localhost:8080/search?query=집짓&page=1&sort=recency' \
---data-raw ''
-
 # 200 ok
 {
     "documents": [
